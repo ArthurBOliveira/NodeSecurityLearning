@@ -16,6 +16,9 @@ var {
 var {
   User
 } = require('./models/user');
+var {
+  authenticate
+} = require('./middleware/authenticate');
 
 var app = express();
 const port = process.env.PORT;
@@ -116,17 +119,6 @@ app.patch('/todos/:id', (req, res) => {
   })
 });
 
-// GET /users
-app.get('/users', (req, res) => {
-  User.find().then((users) => {
-    res.send({
-      users
-    });
-  }, (e) => {
-    res.status(400).send(e);
-  });
-});
-
 // POST /users
 app.post('/users', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
@@ -139,6 +131,10 @@ app.post('/users', (req, res) => {
   }).catch((e) => {
     res.status(400).send(e);
   })
+});
+
+app.get('/users/me', authenticate, (req, res) => {
+  res.send(req.user);
 });
 
 app.listen(port, () => {
