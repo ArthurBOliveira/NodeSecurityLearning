@@ -41,15 +41,9 @@ UserSchema.methods.toJSON = function () {
 };
 
 UserSchema.methods.generateAuthToken = function () {
-<<<<<<< HEAD
   var user = this;
   var access = 'auth';
   var token = jwt.sign({
-=======
-  let user = this;
-  let access = 'auth';
-  let token = jwt.sign({
->>>>>>> 2305620faae7161cb86484f1563a45f84a1e4a2f
     _id: user._id.toHexString(),
     access
   }, 'abc123').toString();

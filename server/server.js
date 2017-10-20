@@ -133,19 +133,8 @@ app.post('/users', (req, res) => {
   })
 });
 
-<<<<<<< HEAD
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
-=======
-app.get('/users/me', (req, res) => {
-  var token = req.header('x-auth');
-
-  User.findByToken(token).then((user) => {
-    if (!user)
-
-      res.send(user);
-  });
->>>>>>> 2305620faae7161cb86484f1563a45f84a1e4a2f
 });
 
 app.listen(port, () => {
